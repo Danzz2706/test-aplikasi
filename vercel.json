@@ -10,7 +10,7 @@
             "destination": "/index.html"
         }
     ],
-    "outputDirectory": "frontend/dist",
+    "outputDirectory": "dist",
     "functions": {
         "api/index.js": {
             "includeFiles": "backend/db.json"
