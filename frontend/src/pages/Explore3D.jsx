@@ -154,7 +154,8 @@ export default function Explore3D() {
       setToast(`✅ ${selected.name} ditandai sebagai dikunjungi (+5 poin)`);
       setTimeout(() => setToast(""), 2500);
     } catch (e) {
-      setToast(e?.response?.data?.error || "Gagal menyimpan progres");
+      const errData = e?.response?.data?.error;
+      setToast(typeof errData === "string" ? errData : "Gagal menyimpan progres");
       setTimeout(() => setToast(""), 2500);
     }
   }

@@ -22,7 +22,9 @@ export default function Login() {
       await login(email, password);
       navigate(from, { replace: true });
     } catch (err) {
-      setError(err?.response?.data?.error || "Gagal login");
+      const errData = err?.response?.data?.error;
+      const msg = typeof errData === "string" ? errData : "Gagal login";
+      setError(msg);
     } finally {
       setBusy(false);
     }

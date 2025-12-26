@@ -22,7 +22,9 @@ export default function Register() {
       const user = await register({ name, role, email, password });
       navigate(user.role === "guru" ? "/teacher" : "/explore", { replace: true });
     } catch (err) {
-      setError(err?.response?.data?.error || "Gagal daftar");
+      const errData = err?.response?.data?.error;
+      const msg = typeof errData === "string" ? errData : "Gagal daftar";
+      setError(msg);
     } finally {
       setBusy(false);
     }
