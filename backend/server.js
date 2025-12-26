@@ -32,12 +32,19 @@ app.get("/", (req, res) => {
   });
 });
 
-app.use("/api/auth", authRoutes);
-app.use("/api/planets", planetRoutes);
-app.use("/api/materials", materialRoutes);
-app.use("/api/questions", questionRoutes);
-app.use("/api/quiz", quizRoutes);
-app.use("/api/progress", progressRoutes);
+const routes = [
+  { path: "/auth", route: authRoutes },
+  { path: "/planets", route: planetRoutes },
+  { path: "/materials", route: materialRoutes },
+  { path: "/questions", route: questionRoutes },
+  { path: "/quiz", route: quizRoutes },
+  { path: "/progress", route: progressRoutes },
+];
+
+routes.forEach((r) => {
+  app.use(`/api${r.path}`, r.route);
+  app.use(r.path, r.route);
+});
 
 // 404
 app.use((req, res) => {
