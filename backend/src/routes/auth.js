@@ -11,6 +11,11 @@ function normalizeRole(role) {
   return "murid";
 }
 
+// Debugging: Allow GET to check if route exists
+router.get("/register", (req, res) => {
+  res.json({ message: "Register endpoint is working. Use POST to create account." });
+});
+
 router.post("/register", async (req, res) => {
   const { name, email, password, role } = req.body || {};
   if (!name || !email || !password) {
