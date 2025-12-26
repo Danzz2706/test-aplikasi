@@ -41,7 +41,7 @@ app.use("/api/progress", progressRoutes);
 
 // 404
 app.use((req, res) => {
-  res.status(404).json({ error: "Not Found" });
+  res.status(404).json({ error: `Not Found: ${req.method} ${req.originalUrl}` });
 });
 
 // Error handler
