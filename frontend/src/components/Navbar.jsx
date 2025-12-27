@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext.jsx";
+// import { useAuth } from "../context/AuthContext.jsx"; // Removed usage for auth logic, but maybe needed for name display? Let's keep it simple.
 
 function LinkItem({ to, children }) {
   return (
@@ -19,7 +19,7 @@ function LinkItem({ to, children }) {
 }
 
 export default function Navbar() {
-  const { user, logout } = useAuth();
+  // const { user, logout } = useAuth(); // Not needed if we just want static nav
   const navigate = useNavigate();
 
   return (
@@ -36,43 +36,17 @@ export default function Navbar() {
         <div className="flex-1" />
 
         <div className="hidden md:flex items-center gap-2">
-          <LinkItem to="/">Home</LinkItem>
-          {user && (
-            <>
-              <LinkItem to="/explore">Eksplorasi</LinkItem>
-              <LinkItem to="/quiz">Kuis</LinkItem>
-              <LinkItem to="/progress">Progres</LinkItem>
-              {user.role === "guru" && <LinkItem to="/teacher">Guru</LinkItem>}
-            </>
-          )}
+          {/* Direct links, no user check needed as we are always 'guest' */}
+          <LinkItem to="/">Eksplorasi</LinkItem>
+          <LinkItem to="/quiz">Kuis</LinkItem>
+          <LinkItem to="/progress">Progres</LinkItem>
         </div>
 
         <div className="flex items-center gap-2">
-          {user ? (
-            <>
-              <span className="hidden sm:inline-flex badge">
-                {user.name} · {user.role === "guru" ? "Guru" : "Murid"}
-              </span>
-              <button
-                className="btn-secondary"
-                onClick={() => {
-                  logout();
-                  navigate("/");
-                }}
-              >
-                Keluar
-              </button>
-            </>
-          ) : (
-            <>
-              <button className="btn-secondary" onClick={() => navigate("/login")}>
-                Masuk
-              </button>
-              <button className="btn-primary" onClick={() => navigate("/register")}>
-                Daftar
-              </button>
-            </>
-          )}
+          {/* Just show a simple badge or nothing */}
+          <span className="hidden sm:inline-flex badge">
+            Pengunjung
+          </span>
         </div>
       </div>
     </div>

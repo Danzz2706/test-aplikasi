@@ -4,41 +4,32 @@ import api from "../api/client.js";
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
-  const [booting, setBooting] = useState(true);
+  // Hardcode user to guest
+  const [user, setUser] = useState({
+    id: "guest",
+    name: "Pengunjung",
+    role: "murid"
+  });
+  const [booting, setBooting] = useState(false);
 
+  // No need to check for token anymore
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      setBooting(false);
-      return;
-    }
-    api.get("/auth/me")
-      .then((res) => setUser(res.data.user))
-      .catch(() => {
-        localStorage.removeItem("token");
-        setUser(null);
-      })
-      .finally(() => setBooting(false));
+    // Just ensure we are "booted"
+    setBooting(false);
   }, []);
 
   async function login(email, password) {
-    const res = await api.post("/auth/login", { email, password });
-    localStorage.setItem("token", res.data.token);
-    setUser(res.data.user);
-    return res.data.user;
+    // No-op or just return current guest
+    return user;
   }
 
   async function register(payload) {
-    const res = await api.post("/auth/register", payload);
-    localStorage.setItem("token", res.data.token);
-    setUser(res.data.user);
-    return res.data.user;
+    // No-op
+    return user;
   }
 
   function logout() {
-    localStorage.removeItem("token");
-    setUser(null);
+    // No-op
   }
 
   const value = useMemo(() => ({ user, booting, login, register, logout }), [user, booting]);

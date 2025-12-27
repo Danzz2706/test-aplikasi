@@ -1,12 +1,12 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar.jsx";
-import ProtectedRoute from "./components/ProtectedRoute.jsx";
-import RoleRoute from "./components/RoleRoute.jsx";
+// import ProtectedRoute from "./components/ProtectedRoute.jsx"; // Removed
+// import RoleRoute from "./components/RoleRoute.jsx"; // Removed or optional
 
-import Home from "./pages/Home.jsx";
-import Login from "./pages/Login.jsx";
-import Register from "./pages/Register.jsx";
+// import Home from "./pages/Home.jsx"; // Removed
+// import Login from "./pages/Login.jsx"; // Removed
+// import Register from "./pages/Register.jsx"; // Removed
 import Explore3D from "./pages/Explore3D.jsx";
 import Knowledge from "./pages/Knowledge.jsx";
 import Quiz from "./pages/Quiz.jsx";
@@ -32,62 +32,34 @@ export default function App() {
     <div className="min-h-screen">
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
+        {/* Direct access to Explore3D on root */}
+        <Route path="/" element={<Explore3D />} />
 
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-
-        <Route
-          path="/explore"
-          element={
-            <ProtectedRoute>
-              <Explore3D />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/explore" element={<Explore3D />} />
 
         <Route
           path="/knowledge/:planetId"
-          element={
-            <ProtectedRoute>
-              <Knowledge />
-            </ProtectedRoute>
-          }
+          element={<Knowledge />}
         />
 
         <Route
           path="/quiz"
-          element={
-            <ProtectedRoute>
-              <Quiz />
-            </ProtectedRoute>
-          }
+          element={<Quiz />}
         />
         <Route
           path="/quiz/:planetId"
-          element={
-            <ProtectedRoute>
-              <Quiz />
-            </ProtectedRoute>
-          }
+          element={<Quiz />}
         />
 
         <Route
           path="/progress"
-          element={
-            <ProtectedRoute>
-              <Progress />
-            </ProtectedRoute>
-          }
+          element={<Progress />}
         />
 
+        {/* Teacher dashboard accessible to anyone now, or restricted by hardcoded role 'murid' effectively hiding it */}
         <Route
           path="/teacher"
-          element={
-            <RoleRoute role="guru">
-              <TeacherDashboard />
-            </RoleRoute>
-          }
+          element={<TeacherDashboard />}
         />
 
         <Route path="/404" element={<NotFound />} />
