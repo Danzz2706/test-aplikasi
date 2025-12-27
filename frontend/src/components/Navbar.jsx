@@ -37,7 +37,7 @@ export default function Navbar() {
 
         <div className="hidden md:flex items-center gap-2">
           {/* Direct links, no user check needed as we are always 'guest' */}
-          <LinkItem to="/">Eksplorasi</LinkItem>
+          <LinkItem to="/explore">Eksplorasi</LinkItem>
           <LinkItem to="/quiz">Kuis</LinkItem>
           <LinkItem to="/progress">Progres</LinkItem>
         </div>

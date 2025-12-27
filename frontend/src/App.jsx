@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar.jsx";
 // import ProtectedRoute from "./components/ProtectedRoute.jsx"; // Removed
 // import RoleRoute from "./components/RoleRoute.jsx"; // Removed or optional
 
-// import Home from "./pages/Home.jsx"; // Removed
+import Home from "./pages/Home.jsx";
 // import Login from "./pages/Login.jsx"; // Removed
 // import Register from "./pages/Register.jsx"; // Removed
 import Explore3D from "./pages/Explore3D.jsx";
@@ -32,8 +32,7 @@ export default function App() {
     <div className="min-h-screen">
       <Navbar />
       <Routes>
-        {/* Direct access to Explore3D on root */}
-        <Route path="/" element={<Explore3D />} />
+        <Route path="/" element={<Home />} />
 
         <Route path="/explore" element={<Explore3D />} />
 
